@@ -70,8 +70,8 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold text-foreground">Office Address</h3>
                     <p className="text-muted-foreground mt-1">
-                      123 Business Park, Andheri East,<br />
-                      Mumbai - 400069, Maharashtra
+                      Andhra Prabha Colony, Ajith Singh Nagar,<br />
+                      Vijayawada - 520015, Andhra Pradesh
                     </p>
                   </div>
                 </div>
@@ -102,13 +102,8 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold text-foreground">Email Address</h3>
                     <p className="text-muted-foreground mt-1">
-                      <a href="mailto:info@svrealestate.com" className="hover:text-accent transition-colors">
-                        info@svrealestate.com
-                      </a>
-                    </p>
-                    <p className="text-muted-foreground">
-                      <a href="mailto:sales@svrealestate.com" className="hover:text-accent transition-colors">
-                        sales@svrealestate.com
+                      <a href="mailto:jatangilingamallu@gmail.com" className="hover:text-accent transition-colors">
+                        jatangilingamallu@gmail.com
                       </a>
                     </p>
                   </div>
@@ -269,7 +264,7 @@ export default function Contact() {
           <div className="mt-16">
             <div className="bg-secondary rounded-xl overflow-hidden h-96">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.8830739850654!2d72.85474897498!3d19.117345782104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c9c676018b43%3A0x75f29a4205098f99!2sAndheri%20East%2C%20Mumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1699123456789!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.1234567890123!2d80.6480!3d16.5062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35eff9e75e1b1f%3A0x0!2sAjith%20Singh%20Nagar%2C%20Vijayawada%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1699123456789!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
