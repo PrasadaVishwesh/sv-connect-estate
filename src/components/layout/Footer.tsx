@@ -38,7 +38,6 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {[
-                { name: 'Browse Properties', href: '/properties' },
                 { name: 'List Your Property', href: '/list-property' },
                 { name: 'About Us', href: '/about' },
                 { name: 'Contact Us', href: '/contact' },
@@ -65,7 +64,7 @@ export function Footer() {
                 'Plots & Land',
               ].map((type) => (
                 <li key={type}>
-                  <Link to="/properties" className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
+                  <Link to="/contact" className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
                     {type}
                   </Link>
                 </li>
@@ -85,9 +84,14 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-accent shrink-0" />
-                <a href="tel:+919876543210" className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
-                  +91 98765 43210
-                </a>
+                <div className="text-primary-foreground/70 text-sm">
+                  <a href="tel:+91809952200" className="hover:text-accent transition-colors block">
+                    +91 80995 2200
+                  </a>
+                  <a href="tel:+917981467553" className="hover:text-accent transition-colors block">
+                    +91 79814 67553
+                  </a>
+                </div>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-accent shrink-0" />
