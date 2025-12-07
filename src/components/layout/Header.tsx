@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
-  { name: 'Properties', href: '/properties', icon: Building2 },
   { name: 'List Property', href: '/list-property', icon: FileText },
   { name: 'About', href: '/about', icon: Users },
   { name: 'Contact', href: '/contact', icon: Mail },
@@ -54,9 +53,9 @@ export function Header() {
 
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
-            <a href="tel:+919876543210" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+            <a href="tel:+917981467553" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
               <Phone className="w-4 h-4" />
-              <span>+91 98765 43210</span>
+              <span>+91 79814 67553</span>
             </a>
             <Button variant="accent" asChild>
               <Link to="/contact">Get Consultation</Link>
@@ -98,9 +97,9 @@ export function Header() {
                 );
               })}
               <div className="mt-4 pt-4 border-t border-border">
-                <a href="tel:+919876543210" className="flex items-center gap-3 px-4 py-3 text-sm text-muted-foreground">
+                <a href="tel:+917981467553" className="flex items-center gap-3 px-4 py-3 text-sm text-muted-foreground">
                   <Phone className="w-5 h-5" />
-                  +91 98765 43210
+                  +91 79814 67553
                 </a>
                 <Button variant="accent" className="w-full mt-2" asChild>
                   <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Get Free Consultation</Link>

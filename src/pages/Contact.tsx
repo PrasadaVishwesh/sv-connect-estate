@@ -83,13 +83,13 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold text-foreground">Phone Number</h3>
                     <p className="text-muted-foreground mt-1">
-                      <a href="tel:+919876543210" className="hover:text-accent transition-colors">
-                        +91 98765 43210
+                      <a href="tel:+91809952200" className="hover:text-accent transition-colors">
+                        +91 80995 2200
                       </a>
                     </p>
                     <p className="text-muted-foreground">
-                      <a href="tel:+912212345678" className="hover:text-accent transition-colors">
-                        +91 22 1234 5678
+                      <a href="tel:+917981467553" className="hover:text-accent transition-colors">
+                        +91 79814 67553
                       </a>
                     </p>
                   </div>
@@ -130,7 +130,7 @@ export default function Contact() {
 
               {/* WhatsApp CTA */}
               <a 
-                href="https://wa.me/919876543210"
+                href="https://wa.me/917981467553"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 text-green-600 hover:bg-green-500/20 transition-colors"
