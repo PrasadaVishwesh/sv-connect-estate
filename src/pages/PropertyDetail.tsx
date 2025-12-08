@@ -278,20 +278,29 @@ export default function PropertyDetail() {
               {/* Quick Contact */}
               <div className="space-y-3 mb-6">
                 <a 
-                  href="tel:+919876543210"
+                  href="tel:+918099952200"
                   className="flex items-center gap-3 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
                 >
                   <Phone className="w-5 h-5 text-accent" />
-                  <span className="font-medium text-foreground">+91 98765 43210</span>
+                  <span className="font-medium text-foreground">+91 80999 52200</span>
                 </a>
                 <a 
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/918099952200?text=Hi%2C%20I%20am%20interested%20in%20this%20property"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 p-3 rounded-lg bg-green-500/10 hover:bg-green-500/20 transition-colors text-green-600"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  <span className="font-medium">Chat on WhatsApp</span>
+                  <span className="font-medium">WhatsApp: 80999 52200</span>
+                </a>
+                <a 
+                  href="https://wa.me/917981467553?text=Hi%2C%20I%20am%20interested%20in%20this%20property"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 rounded-lg bg-green-500/10 hover:bg-green-500/20 transition-colors text-green-600"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span className="font-medium">WhatsApp: 79814 67553</span>
                 </a>
               </div>
 
