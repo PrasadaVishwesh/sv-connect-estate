@@ -293,15 +293,6 @@ export default function PropertyDetail() {
                   <MessageCircle className="w-5 h-5" />
                   <span className="font-medium">WhatsApp: 80999 52200</span>
                 </a>
-                <a 
-                  href="https://wa.me/917981467553?text=Hi%2C%20I%20am%20interested%20in%20this%20property"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-lg bg-green-500/10 hover:bg-green-500/20 transition-colors text-green-600"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  <span className="font-medium">WhatsApp: 79814 67553</span>
-                </a>
               </div>
 
               {/* Enquiry Form */}
