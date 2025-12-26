@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { PropertyCard } from '@/components/PropertyCard';
 import { properties, formatPrice, getPropertyTypeLabel } from '@/data/properties';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const amenityIcons: Record<string, typeof Building2> = {
   'Swimming Pool': Droplets,
@@ -25,6 +26,7 @@ export default function PropertyDetail() {
   const { id } = useParams<{ id: string }>();
   const { toast } = useToast();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -69,14 +71,63 @@ export default function PropertyDetail() {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Submit to backend
-    toast({
-      title: "Enquiry Submitted!",
-      description: "Our team will contact you shortly.",
-    });
-    setFormData({ name: '', phone: '', email: '', message: '', preferredTime: '' });
+    setIsSubmitting(true);
+    
+    try {
+      // Save to database
+      const { error: dbError } = await supabase
+        .from('property_enquiries')
+        .insert({
+          property_id: property.id,
+          property_title: property.title,
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email || null,
+          message: formData.message || null,
+          preferred_time: formData.preferredTime || null,
+        });
+
+      if (dbError) {
+        console.error('Database error:', dbError);
+        throw new Error('Failed to save your enquiry');
+      }
+
+      // Send email notification
+      const { error: emailError } = await supabase.functions.invoke('send-contact-notification', {
+        body: {
+          name: formData.name,
+          email: formData.email || 'Not provided',
+          phone: formData.phone,
+          message: formData.message || `Enquiry for property: ${property.title}`,
+          subject: formData.preferredTime,
+          notificationType: 'property_enquiry',
+          propertyTitle: property.title,
+          propertyId: property.id,
+        },
+      });
+
+      if (emailError) {
+        console.error('Email error:', emailError);
+        // Don't throw - enquiry was saved
+      }
+
+      toast({
+        title: "Enquiry Submitted!",
+        description: "Our team will contact you shortly.",
+      });
+      setFormData({ name: '', phone: '', email: '', message: '', preferredTime: '' });
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to submit enquiry. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -285,6 +336,13 @@ export default function PropertyDetail() {
                   <span className="font-medium text-foreground">+91 80999 52200</span>
                 </a>
                 <a 
+                  href="tel:+917981467553"
+                  className="flex items-center gap-3 p-3 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
+                >
+                  <Phone className="w-5 h-5 text-accent" />
+                  <span className="font-medium text-foreground">+91 79814 67553</span>
+                </a>
+                <a 
                   href="https://wa.me/918099952200?text=Hi%2C%20I%20am%20interested%20in%20this%20property"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -338,8 +396,8 @@ export default function PropertyDetail() {
                   <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
                   <option value="evening">Evening (5 PM - 9 PM)</option>
                 </select>
-                <Button type="submit" variant="accent" className="w-full">
-                  Send Enquiry
+                <Button type="submit" variant="accent" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Enquiry'}
                 </Button>
               </form>
             </div>
