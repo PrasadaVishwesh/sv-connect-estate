@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, Home, Building2, Users, Mail, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import svLogo from '@/assets/sv-logo.jpg';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
@@ -21,13 +22,11 @@ export function Header() {
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <Building2 className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <span className="text-xl font-bold text-foreground">S.V Real Estate</span>
-              <p className="text-xs text-muted-foreground hidden sm:block">Your Trusted Property Partner</p>
-            </div>
+            <img 
+              src={svLogo} 
+              alt="S.V Real Estate Logo" 
+              className="h-14 w-auto object-contain"
+            />
           </Link>
 
           {/* Desktop Navigation */}
