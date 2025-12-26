@@ -3,6 +3,7 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { Building2, CheckCircle2, Upload, ArrowRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 const propertyTypes = [
   { value: 'apartment', label: 'Apartment' },
@@ -50,16 +51,69 @@ export default function ListProperty() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Save to database
+      const { error: dbError } = await supabase
+        .from('owner_submissions')
+        .insert({
+          owner_name: formData.ownerName,
+          owner_phone: formData.ownerPhone,
+          owner_email: formData.ownerEmail,
+          property_type: formData.propertyType,
+          listing_type: formData.listingType,
+          title: formData.title,
+          address: formData.address || null,
+          city: formData.city,
+          area: formData.area,
+          bedrooms: formData.bedrooms ? parseInt(formData.bedrooms) : null,
+          bathrooms: formData.bathrooms ? parseInt(formData.bathrooms) : null,
+          area_sqft: formData.areaSqFt,
+          expected_price: formData.expectedPrice,
+          description: formData.description || null,
+        });
+
+      if (dbError) {
+        console.error('Database error:', dbError);
+        throw new Error('Failed to save your submission');
+      }
+
+      // Send email notification
+      const { error: emailError } = await supabase.functions.invoke('send-contact-notification', {
+        body: {
+          name: formData.ownerName,
+          email: formData.ownerEmail,
+          phone: formData.ownerPhone,
+          message: formData.description || `Property listing request for ${formData.title}`,
+          notificationType: 'owner_submission',
+          propertyType: propertyTypes.find(t => t.value === formData.propertyType)?.label || formData.propertyType,
+          listingType: listingTypes.find(t => t.value === formData.listingType)?.label || formData.listingType,
+          city: formData.city,
+          area: formData.area,
+          expectedPrice: formData.expectedPrice ? `₹${parseInt(formData.expectedPrice).toLocaleString()}` : '',
+        },
+      });
+
+      if (emailError) {
+        console.error('Email error:', emailError);
+        // Don't throw - submission was saved
+      }
     
-    toast({
-      title: "Property Submitted Successfully!",
-      description: "Our team will review your property and contact you within 24 hours.",
-    });
+      toast({
+        title: "Property Submitted Successfully!",
+        description: "Our team will review your property and contact you within 24 hours.",
+      });
     
-    setStep(3); // Success step
-    setIsSubmitting(false);
+      setStep(3); // Success step
+    } catch (error: any) {
+      console.error('Submission error:', error);
+      toast({
+        title: "Error",
+        description: error.message || "Failed to submit. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const benefits = [

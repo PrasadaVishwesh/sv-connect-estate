@@ -121,10 +121,13 @@ export default function Contact() {
                     <Phone className="w-6 h-6 text-accent" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-foreground">Phone Number</h3>
+                    <h3 className="font-semibold text-foreground">Phone Numbers</h3>
                     <p className="text-muted-foreground mt-1">
-                      <a href="tel:+918099952200" className="hover:text-accent transition-colors">
+                      <a href="tel:+918099952200" className="hover:text-accent transition-colors block">
                         +91 80999 52200
+                      </a>
+                      <a href="tel:+917981467553" className="hover:text-accent transition-colors block">
+                        +91 79814 67553
                       </a>
                     </p>
                   </div>

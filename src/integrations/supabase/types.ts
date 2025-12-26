@@ -50,6 +50,111 @@ export type Database = {
         }
         Relationships: []
       }
+      owner_submissions: {
+        Row: {
+          address: string | null
+          area: string
+          area_sqft: string | null
+          bathrooms: number | null
+          bedrooms: number | null
+          city: string
+          created_at: string
+          description: string | null
+          expected_price: string | null
+          id: string
+          listing_type: string
+          owner_email: string
+          owner_name: string
+          owner_phone: string
+          property_type: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          area: string
+          area_sqft?: string | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          city: string
+          created_at?: string
+          description?: string | null
+          expected_price?: string | null
+          id?: string
+          listing_type: string
+          owner_email: string
+          owner_name: string
+          owner_phone: string
+          property_type: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          area?: string
+          area_sqft?: string | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          city?: string
+          created_at?: string
+          description?: string | null
+          expected_price?: string | null
+          id?: string
+          listing_type?: string
+          owner_email?: string
+          owner_name?: string
+          owner_phone?: string
+          property_type?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      property_enquiries: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string | null
+          name: string
+          phone: string
+          preferred_time: string | null
+          property_id: string
+          property_title: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name: string
+          phone: string
+          preferred_time?: string | null
+          property_id: string
+          property_title: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string
+          preferred_time?: string | null
+          property_id?: string
+          property_title?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
