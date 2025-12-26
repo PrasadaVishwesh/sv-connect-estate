@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Building2, Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import svLogo from '@/assets/sv-logo.jpg';
 
 export function Footer() {
   return (
@@ -9,10 +10,11 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                <Building2 className="w-6 h-6 text-accent-foreground" />
-              </div>
-              <span className="text-xl font-bold">S.V Real Estate</span>
+              <img 
+                src={svLogo} 
+                alt="S.V Real Estate Logo" 
+                className="h-16 w-auto object-contain rounded-lg bg-white p-1"
+              />
             </Link>
             <p className="text-primary-foreground/70 text-sm leading-relaxed mb-6">
               Connecting people to the right property, stress-free. Your trusted real estate mediator for buying, selling, and renting properties.
