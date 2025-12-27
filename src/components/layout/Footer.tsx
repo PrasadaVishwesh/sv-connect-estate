@@ -40,6 +40,7 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-6">Quick Links</h3>
             <ul className="space-y-3">
               {[
+                { name: 'Browse Properties', href: '/properties' },
                 { name: 'List Your Property', href: '/list-property' },
                 { name: 'About Us', href: '/about' },
                 { name: 'Contact Us', href: '/contact' },
@@ -59,15 +60,15 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-6">Property Types</h3>
             <ul className="space-y-3">
               {[
-                'Apartments for Sale',
-                'Apartments for Rent',
-                'Villas & Houses',
-                'Commercial Spaces',
-                'Plots & Land',
+                { name: 'Apartments for Sale', href: '/properties?type=sale&propertyType=apartment' },
+                { name: 'Apartments for Rent', href: '/properties?type=rent&propertyType=apartment' },
+                { name: 'Villas & Houses', href: '/properties?type=sale&propertyType=villa' },
+                { name: 'Commercial Spaces', href: '/properties?type=sale&propertyType=commercial' },
+                { name: 'Plots & Land', href: '/properties?type=sale&propertyType=plot' },
               ].map((type) => (
-                <li key={type}>
-                  <Link to="/contact" className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
-                    {type}
+                <li key={type.name}>
+                  <Link to={type.href} className="text-primary-foreground/70 hover:text-accent transition-colors text-sm">
+                    {type.name}
                   </Link>
                 </li>
               ))}

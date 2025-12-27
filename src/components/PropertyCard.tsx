@@ -16,7 +16,7 @@ export function PropertyCard({ property, className }: PropertyCardProps) {
 
   return (
     <Link 
-      to={`/properties/${property.id}`}
+      to={`/property/${property.id}`}
       className={cn(
         "group block bg-card rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-1",
         className
