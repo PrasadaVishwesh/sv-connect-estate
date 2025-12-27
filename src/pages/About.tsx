@@ -3,8 +3,9 @@ import { Layout } from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
 import { 
   Users, Target, Award, Heart, 
-  CheckCircle2, ArrowRight, Building2 
+  CheckCircle2, ArrowRight, Building2, Phone
 } from 'lucide-react';
+import svLogo from '@/assets/sv-logo.jpg';
 
 const values = [
   {
@@ -69,11 +70,43 @@ export default function About() {
         </div>
       </section>
 
-      {/* Story Section */}
+      {/* Founder Section */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="relative animate-fade-up">
+              <div className="bg-card rounded-2xl shadow-xl p-8 text-center">
+                <div className="w-40 h-40 mx-auto mb-6 rounded-full overflow-hidden border-4 border-accent shadow-lg">
+                  <img 
+                    src={svLogo} 
+                    alt="S.V Real Estate"
+                    className="w-full h-full object-cover bg-white"
+                  />
+                </div>
+                <h3 className="text-2xl font-bold text-foreground mb-2">Jatangi Lingamallu</h3>
+                <p className="text-accent font-medium mb-4">Founder & CEO</p>
+                <p className="text-muted-foreground mb-6">
+                  With over a decade of experience in the real estate industry, our founder has built 
+                  S.V Real Estate on the principles of trust, transparency, and customer satisfaction.
+                </p>
+                <div className="flex justify-center gap-4">
+                  <a 
+                    href="tel:+918099952200"
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
+                  >
+                    <Phone className="w-4 h-4" />
+                    Contact
+                  </a>
+                </div>
+              </div>
+              <div className="absolute -bottom-4 -right-4 bg-accent text-accent-foreground p-6 rounded-xl shadow-lg hidden lg:block">
+                <Building2 className="w-8 h-8 mb-2" />
+                <div className="text-2xl font-bold">Trusted</div>
+                <div className="text-sm">Property Mediators</div>
+              </div>
+            </div>
+            
+            <div className="animate-fade-up stagger-1">
               <span className="text-accent font-semibold text-sm uppercase tracking-wider">Our Story</span>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-6">
                 A Decade of Connecting Dreams to Doorsteps
@@ -82,8 +115,8 @@ export default function About() {
                 <p>
                   S.V Real Estate was founded with a simple mission: to make property transactions 
                   transparent, stress-free, and accessible to everyone. What started as a small 
-                  consultancy has grown into one of the most trusted real estate mediation firms 
-                  in the region.
+                  consultancy in Ajith Singh Nagar, Vijayawada has grown into one of the most trusted 
+                  real estate mediation firms in the region.
                 </p>
                 <p>
                   As mediators, we don't build properties – we build relationships. We act as 
@@ -109,18 +142,6 @@ export default function About() {
                   <div className="text-4xl font-bold text-accent">500+</div>
                   <div className="text-sm text-muted-foreground">Properties Sold</div>
                 </div>
-              </div>
-            </div>
-            <div className="relative">
-              <img 
-                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800" 
-                alt="S.V Real Estate Team"
-                className="rounded-2xl shadow-xl"
-              />
-              <div className="absolute -bottom-6 -left-6 bg-accent text-accent-foreground p-6 rounded-xl shadow-lg">
-                <Building2 className="w-8 h-8 mb-2" />
-                <div className="text-2xl font-bold">Trusted</div>
-                <div className="text-sm">Property Mediators</div>
               </div>
             </div>
           </div>

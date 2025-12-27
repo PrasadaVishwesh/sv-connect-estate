@@ -7,6 +7,7 @@ import svLogo from '@/assets/sv-logo.jpg';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
+  { name: 'Properties', href: '/properties', icon: Building2 },
   { name: 'List Property', href: '/list-property', icon: FileText },
   { name: 'About', href: '/about', icon: Users },
   { name: 'Contact', href: '/contact', icon: Mail },
