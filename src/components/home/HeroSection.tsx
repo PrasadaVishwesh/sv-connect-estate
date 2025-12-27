@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Search, MapPin, Building2, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import svBanner from '@/assets/sv-banner.jpg';
 
 export function HeroSection() {
   const navigate = useNavigate();
@@ -15,14 +14,7 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-105"
-        style={{ backgroundImage: `url(${svBanner})` }}
-      />
-      {/* Dark Overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/70 via-primary/60 to-primary/80" />
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90">
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
