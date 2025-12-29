@@ -165,15 +165,27 @@ export default function Contact() {
               <div className="space-y-3">
                 <h3 className="font-semibold text-foreground">Chat on WhatsApp</h3>
                 <a 
-                  href="https://wa.me/918099952200?text=Hi%2C%20I%20am%20interested%20in%20your%20real%20estate%20services"
+                  href={`https://wa.me/918099952200?text=${encodeURIComponent('Hi! I am interested in your real estate services. Please share more details.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-4 rounded-xl bg-green-500/10 text-green-600 hover:bg-green-500/20 transition-colors"
+                  className="flex items-center gap-3 p-4 rounded-xl bg-[#25D366] text-white hover:bg-[#20BD5C] transition-colors"
                 >
                   <MessageCircle className="w-6 h-6" />
                   <div>
                     <div className="font-semibold">+91 80999 52200</div>
-                    <div className="text-sm opacity-80">Get instant replies</div>
+                    <div className="text-sm opacity-90">Get instant replies</div>
+                  </div>
+                </a>
+                <a 
+                  href={`https://wa.me/917981467553?text=${encodeURIComponent('Hi! I am interested in your real estate services. Please share more details.')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-4 rounded-xl bg-[#25D366] text-white hover:bg-[#20BD5C] transition-colors"
+                >
+                  <MessageCircle className="w-6 h-6" />
+                  <div>
+                    <div className="font-semibold">+91 79814 67553</div>
+                    <div className="text-sm opacity-90">Alternative number</div>
                   </div>
                 </a>
               </div>
