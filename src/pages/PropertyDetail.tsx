@@ -343,13 +343,16 @@ export default function PropertyDetail() {
                   <span className="font-medium text-foreground">+91 79814 67553</span>
                 </a>
                 <a 
-                  href="https://wa.me/918099952200?text=Hi%2C%20I%20am%20interested%20in%20this%20property"
+                  href={`https://wa.me/918099952200?text=${encodeURIComponent(`Hi! I am interested in property: ${property.title} (ID: ${property.id}) located at ${property.location.area}, ${property.location.city}. Please share more details.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3 rounded-lg bg-green-500/10 hover:bg-green-500/20 transition-colors text-green-600"
+                  className="flex items-center gap-3 p-4 rounded-lg bg-[#25D366] hover:bg-[#20BD5C] transition-colors text-white"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  <span className="font-medium">WhatsApp: 80999 52200</span>
+                  <div>
+                    <span className="font-semibold block">Enquire on WhatsApp</span>
+                    <span className="text-sm opacity-90">+91 80999 52200</span>
+                  </div>
                 </a>
               </div>
 

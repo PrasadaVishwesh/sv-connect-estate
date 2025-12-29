@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, Building2, ArrowRight } from 'lucide-react';
+import { Search, MapPin, Building2, ArrowRight, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import svBanner from '@/assets/sv-banner.jpg';
 
 export function HeroSection() {
   const navigate = useNavigate();
@@ -13,8 +14,17 @@ export function HeroSection() {
     navigate(`/properties?type=${listingType}&q=${searchQuery}`);
   };
 
+  const whatsappUrl = `https://wa.me/918099952200?text=${encodeURIComponent('Hi! I am interested in your real estate services. Please help me find a property.')}`;
+
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${svBanner})` }}
+      />
+      {/* Dark Overlay for better text readability - opacity 0.65 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/75 via-primary/65 to-primary/80" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -27,13 +37,13 @@ export function HeroSection() {
           </div>
 
           {/* Heading with text shadow */}
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-primary-foreground leading-tight mb-6 animate-fade-up stagger-1 drop-shadow-2xl [text-shadow:_0_4px_12px_rgba(0,0,0,0.5)]">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-primary-foreground leading-tight mb-6 animate-fade-up stagger-1 drop-shadow-2xl" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.6)' }}>
             Your Trusted Partner for
-            <span className="block text-accent drop-shadow-lg [text-shadow:_0_4px_12px_rgba(0,0,0,0.3)]">Homes & Plots</span>
+            <span className="block text-accent drop-shadow-lg" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.4)' }}>Homes & Plots</span>
           </h1>
 
           {/* Tagline with text shadow */}
-          <p className="text-lg md:text-xl text-primary-foreground max-w-2xl mx-auto mb-4 animate-fade-up stagger-2 drop-shadow-lg [text-shadow:_0_2px_8px_rgba(0,0,0,0.5)]">
+          <p className="text-lg md:text-xl text-primary-foreground max-w-2xl mx-auto mb-4 animate-fade-up stagger-2 drop-shadow-lg" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
             BUY • SELL • INVEST
           </p>
           <p className="text-base md:text-lg text-primary-foreground/90 max-w-2xl mx-auto mb-10 animate-fade-up stagger-2 drop-shadow-md">
@@ -116,14 +126,15 @@ export function HeroSection() {
               Explore Properties
               <ArrowRight className="w-4 h-4" />
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/20 backdrop-blur-sm"
-              onClick={() => navigate('/list-property')}
+            <a 
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-6 h-12 rounded-lg bg-[#25D366] hover:bg-[#20BD5C] text-white font-semibold transition-colors shadow-lg hover:shadow-xl"
             >
-              List Your Property
-            </Button>
+              <MessageCircle className="w-5 h-5" />
+              Contact on WhatsApp
+            </a>
           </div>
 
           {/* Quick Stats */}
