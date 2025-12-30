@@ -17,14 +17,7 @@ export function HeroSection() {
   const whatsappUrl = `https://wa.me/918099952200?text=${encodeURIComponent('Hi! I am interested in your real estate services. Please help me find a property.')}`;
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${svBanner})` }}
-      />
-      {/* Dark Overlay for better text readability - opacity 0.65 */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/75 via-primary/65 to-primary/80" />
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-primary">
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
