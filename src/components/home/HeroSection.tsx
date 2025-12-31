@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Search, MapPin, Building2, ArrowRight, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import svBanner from '@/assets/sv-banner.jpg';
+
 
 export function HeroSection() {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export function HeroSection() {
   const whatsappUrl = `https://wa.me/918099952200?text=${encodeURIComponent('Hi! I am interested in your real estate services. Please help me find a property.')}`;
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/85">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/85 hero-shimmer">
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
