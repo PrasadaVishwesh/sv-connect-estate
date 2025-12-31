@@ -17,34 +17,34 @@ export function HeroSection() {
   const whatsappUrl = `https://wa.me/918099952200?text=${encodeURIComponent('Hi! I am interested in your real estate services. Please help me find a property.')}`;
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-primary">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/85">
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/15 backdrop-blur-sm mb-8 animate-fade-up border border-primary-foreground/20">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/15 backdrop-blur-sm mb-8 animate-fade-up border border-primary-foreground/20 opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards]">
+            <span className="w-2 h-2 rounded-full bg-accent" />
             <span className="text-primary-foreground text-sm font-medium drop-shadow-lg">
               Trusted by 10,000+ Happy Customers
             </span>
           </div>
 
           {/* Heading with text shadow */}
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-primary-foreground leading-tight mb-6 animate-fade-up stagger-1 drop-shadow-2xl" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.6)' }}>
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-primary-foreground leading-tight mb-6 animate-fade-up drop-shadow-2xl opacity-0 [animation-delay:400ms] [animation-fill-mode:forwards]" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.6)' }}>
             Your Trusted Partner for
             <span className="block text-accent drop-shadow-lg" style={{ textShadow: '0 4px 12px rgba(0,0,0,0.4)' }}>Homes & Plots</span>
           </h1>
 
           {/* Tagline with text shadow */}
-          <p className="text-lg md:text-xl text-primary-foreground max-w-2xl mx-auto mb-4 animate-fade-up stagger-2 drop-shadow-lg" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
+          <p className="text-lg md:text-xl text-primary-foreground max-w-2xl mx-auto mb-4 animate-fade-up drop-shadow-lg opacity-0 [animation-delay:600ms] [animation-fill-mode:forwards]" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
             BUY • SELL • INVEST
           </p>
-          <p className="text-base md:text-lg text-primary-foreground/90 max-w-2xl mx-auto mb-10 animate-fade-up stagger-2 drop-shadow-md">
+          <p className="text-base md:text-lg text-primary-foreground/90 max-w-2xl mx-auto mb-10 animate-fade-up drop-shadow-md opacity-0 [animation-delay:700ms] [animation-fill-mode:forwards]">
             Independent Houses | Apartments | Open Plots
           </p>
 
           {/* Search Box */}
-          <div className="bg-card/95 backdrop-blur-md rounded-2xl p-6 shadow-2xl max-w-3xl mx-auto animate-fade-up stagger-3 border border-border/50">
+          <div className="bg-card/95 backdrop-blur-md rounded-2xl p-6 shadow-2xl max-w-3xl mx-auto animate-scale-in border border-border/50 opacity-0 [animation-delay:900ms] [animation-fill-mode:forwards]">
             {/* Toggle Buttons */}
             <div className="flex gap-2 mb-6">
               <button
@@ -109,7 +109,7 @@ export function HeroSection() {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 animate-fade-up stagger-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 animate-fade-up opacity-0 [animation-delay:1100ms] [animation-fill-mode:forwards]">
             <Button 
               variant="accent" 
               size="lg" 
@@ -131,7 +131,7 @@ export function HeroSection() {
           </div>
 
           {/* Quick Stats */}
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-12 animate-fade-up stagger-5">
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-12 animate-fade-up opacity-0 [animation-delay:1300ms] [animation-fill-mode:forwards]">
             {[
               { value: '500+', label: 'Properties Listed' },
               { value: '1000+', label: 'Happy Clients' },
