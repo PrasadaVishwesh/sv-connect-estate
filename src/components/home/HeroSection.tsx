@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Search, MapPin, Building2, ArrowRight, MessageCircle } from 'lucide-react';
+import { Search, Building2, ArrowRight, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { LocationAutocomplete } from '@/components/LocationAutocomplete';
 import { cn } from '@/lib/utils';
-
 
 export function HeroSection() {
   const navigate = useNavigate();
@@ -113,16 +113,11 @@ export function HeroSection() {
 
             {/* Search Fields */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="relative">
-                <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Enter location..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent transition-all"
-                />
-              </div>
+              <LocationAutocomplete
+                value={searchQuery}
+                onChange={setSearchQuery}
+                placeholder="Enter location..."
+              />
               
               <div className="relative">
                 <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
