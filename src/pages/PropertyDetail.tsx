@@ -6,6 +6,7 @@ import {
   Building2, Car, Shield, Zap, Droplets, Wifi
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
+import { PageTransition } from '@/components/PageTransition';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { PropertyCard } from '@/components/PropertyCard';
@@ -131,7 +132,8 @@ export default function PropertyDetail() {
   };
 
   return (
-    <Layout>
+    <PageTransition>
+      <Layout>
       {/* Breadcrumb */}
       <div className="bg-secondary py-4">
         <div className="container mx-auto px-4 lg:px-8">
@@ -420,5 +422,6 @@ export default function PropertyDetail() {
         )}
       </div>
     </Layout>
+  </PageTransition>
   );
 }

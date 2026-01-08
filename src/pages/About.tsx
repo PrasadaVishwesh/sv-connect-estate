@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
+import { PageTransition } from '@/components/PageTransition';
 import { Button } from '@/components/ui/button';
 import { 
   Users, Target, Award, Heart, 
@@ -55,7 +56,8 @@ const services = [
 
 export default function About() {
   return (
-    <Layout>
+    <PageTransition>
+      <Layout>
       {/* Hero Section */}
       <section className="bg-primary py-20">
         <div className="container mx-auto px-4 lg:px-8">
@@ -270,5 +272,6 @@ export default function About() {
         </div>
       </section>
     </Layout>
+  </PageTransition>
   );
 }
