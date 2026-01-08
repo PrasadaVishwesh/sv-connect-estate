@@ -35,7 +35,7 @@ export function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/85 hero-shimmer"
+      className="relative min-h-screen py-24 flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/85 hero-shimmer"
     >
       {/* Parallax Background Elements */}
       <div 
@@ -176,7 +176,7 @@ export function HeroSection() {
               { value: '500+', label: 'Properties Listed' },
               { value: '1000+', label: 'Happy Clients' },
               { value: '50+', label: 'Cities Covered' },
-              { value: '10+', label: 'Years Experience' },
+              { value: '20+', label: 'Years Experience' },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-accent drop-shadow-lg">{stat.value}</div>
