@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, MapPin, Building2, ArrowRight, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,22 @@ export function HeroSection() {
   const navigate = useNavigate();
   const [listingType, setListingType] = useState<'sale' | 'rent'>('sale');
   const [searchQuery, setSearchQuery] = useState('');
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        if (rect.bottom > 0) {
+          setScrollY(window.scrollY);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSearch = () => {
     navigate(`/properties?type=${listingType}&q=${searchQuery}`);
@@ -17,9 +33,33 @@ export function HeroSection() {
   const whatsappUrl = `https://wa.me/918099952200?text=${encodeURIComponent('Hi! I am interested in your real estate services. Please help me find a property.')}`;
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/85 hero-shimmer">
+    <section 
+      ref={sectionRef}
+      className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/85 hero-shimmer"
+    >
+      {/* Parallax Background Elements */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+      >
+        <div className="absolute top-20 left-10 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-accent/5 rounded-full blur-2xl" />
+      </div>
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      {/* Slower parallax layer */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+      >
+        <div className="absolute top-40 right-1/4 w-32 h-32 bg-primary-foreground/10 rounded-full blur-2xl" />
+        <div className="absolute bottom-40 left-1/4 w-56 h-56 bg-accent/8 rounded-full blur-3xl" />
+      </div>
+
+      <div 
+        className="container mx-auto px-4 lg:px-8 relative z-10"
+        style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+      >
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/15 backdrop-blur-sm mb-8 animate-fade-up border border-primary-foreground/20 opacity-0 [animation-delay:200ms] [animation-fill-mode:forwards]">

@@ -1,11 +1,22 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { PropertyCard } from '@/components/PropertyCard';
+import { PropertyCardSkeleton } from '@/components/PropertyCardSkeleton';
 import { properties } from '@/data/properties';
 import { ArrowRight } from 'lucide-react';
 
 export function FeaturedProperties() {
+  const [isLoading, setIsLoading] = useState(true);
   const featuredProperties = properties.filter((p) => p.featured).slice(0, 3);
+
+  // Simulate loading state for demo purposes
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="py-20 bg-background">
@@ -29,15 +40,23 @@ export function FeaturedProperties() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredProperties.map((property, index) => (
-            <div
-              key={property.id}
-              className="animate-fade-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <PropertyCard property={property} />
-            </div>
-          ))}
+          {isLoading ? (
+            <>
+              {[1, 2, 3].map((i) => (
+                <PropertyCardSkeleton key={i} />
+              ))}
+            </>
+          ) : (
+            featuredProperties.map((property, index) => (
+              <div
+                key={property.id}
+                className="animate-fade-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <PropertyCard property={property} />
+              </div>
+            ))
+          )}
         </div>
       </div>
     </section>
