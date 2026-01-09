@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
-import { PageTransition } from '@/components/PageTransition';
 import { Button } from '@/components/ui/button';
 import { 
   Phone, Mail, MapPin, Clock, MessageCircle, 
@@ -8,7 +7,6 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-
 export default function Contact() {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -76,8 +74,7 @@ export default function Contact() {
   };
 
   return (
-    <PageTransition>
-      <Layout>
+    <Layout>
       {/* Hero Section */}
       <section className="bg-primary py-20">
         <div className="container mx-auto px-4 lg:px-8">
@@ -332,6 +329,5 @@ export default function Contact() {
         </div>
       </section>
     </Layout>
-  </PageTransition>
   );
 }
