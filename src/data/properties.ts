@@ -16,6 +16,10 @@ export interface Property {
     city: string;
     area: string;
     address: string;
+    coordinates?: {
+      lat: number;
+      lng: number;
+    };
   };
   bedrooms: number;
   bathrooms: number;
@@ -40,7 +44,8 @@ export const properties: Property[] = [
     location: {
       city: 'Mumbai',
       area: 'Bandra West',
-      address: 'Sea Breeze Towers, Carter Road'
+      address: 'Sea Breeze Towers, Carter Road',
+      coordinates: { lat: 19.0596, lng: 72.8295 }
     },
     bedrooms: 3,
     bathrooms: 3,
@@ -70,7 +75,8 @@ export const properties: Property[] = [
     location: {
       city: 'Mumbai',
       area: 'Andheri East',
-      address: 'Infinity Mall Road, MIDC'
+      address: 'Infinity Mall Road, MIDC',
+      coordinates: { lat: 19.1136, lng: 72.8697 }
     },
     bedrooms: 2,
     bathrooms: 2,
@@ -96,7 +102,8 @@ export const properties: Property[] = [
     location: {
       city: 'Pune',
       area: 'Koregaon Park',
-      address: 'Green Valley Enclave'
+      address: 'Green Valley Enclave',
+      coordinates: { lat: 18.5362, lng: 73.8932 }
     },
     bedrooms: 4,
     bathrooms: 4,
@@ -124,7 +131,8 @@ export const properties: Property[] = [
     location: {
       city: 'Bangalore',
       area: 'Whitefield',
-      address: 'Phoenix Tech Park, ITPL Road'
+      address: 'Phoenix Tech Park, ITPL Road',
+      coordinates: { lat: 12.9698, lng: 77.7500 }
     },
     bedrooms: 0,
     bathrooms: 4,
@@ -150,7 +158,8 @@ export const properties: Property[] = [
     location: {
       city: 'Mumbai',
       area: 'Powai',
-      address: 'Hiranandani Gardens'
+      address: 'Hiranandani Gardens',
+      coordinates: { lat: 19.1176, lng: 72.9060 }
     },
     bedrooms: 1,
     bathrooms: 1,
@@ -176,7 +185,8 @@ export const properties: Property[] = [
     location: {
       city: 'Pune',
       area: 'Hinjewadi',
-      address: 'Near Rajiv Gandhi IT Park'
+      address: 'Near Rajiv Gandhi IT Park',
+      coordinates: { lat: 18.5912, lng: 73.7380 }
     },
     bedrooms: 0,
     bathrooms: 0,

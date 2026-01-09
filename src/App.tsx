@@ -9,6 +9,7 @@ import PropertyDetail from "./pages/PropertyDetail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import ListProperty from "./pages/ListProperty";
+import MapView from "./pages/MapView";
 import NotFound from "./pages/NotFound";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/properties" element={<Properties />} />
           <Route path="/property/:id" element={<PropertyDetail />} />
+          <Route path="/map" element={<MapView />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/list-property" element={<ListProperty />} />
