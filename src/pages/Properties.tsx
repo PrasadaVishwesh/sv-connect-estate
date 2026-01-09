@@ -1,13 +1,11 @@
 import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Layout } from '@/components/layout/Layout';
-import { PageTransition } from '@/components/PageTransition';
 import { PropertyCard } from '@/components/PropertyCard';
 import { Button } from '@/components/ui/button';
 import { properties, Property, PropertyType, ListingType } from '@/data/properties';
 import { Search, Filter, X, SlidersHorizontal, MapPin, Home, Building2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
 const propertyTypes: { value: PropertyType | ''; label: string }[] = [
   { value: '', label: 'All Types' },
   { value: 'apartment', label: 'Apartment' },
@@ -89,8 +87,7 @@ export default function Properties() {
   const hasActiveFilters = propertyType || priceRange || city !== 'All Cities' || searchQuery;
 
   return (
-    <PageTransition>
-      <Layout>
+    <Layout>
       {/* Hero Section */}
       <section className="bg-primary py-16">
         <div className="container mx-auto px-4 lg:px-8">
@@ -300,6 +297,5 @@ export default function Properties() {
         </div>
       </section>
     </Layout>
-  </PageTransition>
   );
 }

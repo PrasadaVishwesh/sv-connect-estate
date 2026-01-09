@@ -6,14 +6,12 @@ import {
   Building2, Car, Shield, Zap, Droplets, Wifi
 } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
-import { PageTransition } from '@/components/PageTransition';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { PropertyCard } from '@/components/PropertyCard';
 import { properties, formatPrice, getPropertyTypeLabel } from '@/data/properties';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-
 const amenityIcons: Record<string, typeof Building2> = {
   'Swimming Pool': Droplets,
   'Gym': Building2,
@@ -132,8 +130,7 @@ export default function PropertyDetail() {
   };
 
   return (
-    <PageTransition>
-      <Layout>
+    <Layout>
       {/* Breadcrumb */}
       <div className="bg-secondary py-4">
         <div className="container mx-auto px-4 lg:px-8">
@@ -422,6 +419,5 @@ export default function PropertyDetail() {
         )}
       </div>
     </Layout>
-  </PageTransition>
   );
 }

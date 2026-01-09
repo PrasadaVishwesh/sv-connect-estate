@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Layout } from '@/components/layout/Layout';
-import { PageTransition } from '@/components/PageTransition';
 import { Button } from '@/components/ui/button';
 import { Building2, CheckCircle2, Upload, ArrowRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -127,8 +126,7 @@ export default function ListProperty() {
   ];
 
   return (
-    <PageTransition>
-      <Layout>
+    <Layout>
       {/* Hero Section */}
       <section className="bg-primary py-16">
         <div className="container mx-auto px-4 lg:px-8">
@@ -490,6 +488,5 @@ export default function ListProperty() {
         </div>
       </section>
     </Layout>
-  </PageTransition>
   );
 }
