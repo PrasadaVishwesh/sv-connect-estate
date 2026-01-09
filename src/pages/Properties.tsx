@@ -4,8 +4,9 @@ import { Layout } from '@/components/layout/Layout';
 import { PropertyCard } from '@/components/PropertyCard';
 import { Button } from '@/components/ui/button';
 import { properties, Property, PropertyType, ListingType } from '@/data/properties';
-import { Search, Filter, X, SlidersHorizontal, MapPin, Home, Building2 } from 'lucide-react';
+import { Search, Filter, X, SlidersHorizontal, MapPin, Home, Building2, Map } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 const propertyTypes: { value: PropertyType | ''; label: string }[] = [
   { value: '', label: 'All Types' },
   { value: 'apartment', label: 'Apartment' },
@@ -233,6 +234,12 @@ export default function Properties() {
               Showing <span className="font-semibold text-foreground">{filteredProperties.length}</span> properties
               {listingType === 'sale' ? ' for sale' : ' for rent'}
             </p>
+            <Button variant="outline" asChild className="gap-2">
+              <Link to="/map">
+                <Map className="w-4 h-4" />
+                Map View
+              </Link>
+            </Button>
           </div>
 
           {/* Properties Grid */}
