@@ -38,6 +38,7 @@ export default function ListProperty() {
     areaSqFt: '',
     expectedPrice: '',
     description: '',
+    website: '', // Honeypot field - should always be empty
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -84,6 +85,7 @@ export default function ListProperty() {
           email: formData.ownerEmail,
           phone: formData.ownerPhone,
           message: formData.description || `Property listing request for ${formData.title}`,
+          website: formData.website, // Honeypot field
           notificationType: 'owner_submission',
           propertyType: propertyTypes.find(t => t.value === formData.propertyType)?.label || formData.propertyType,
           listingType: listingTypes.find(t => t.value === formData.listingType)?.label || formData.listingType,
@@ -188,7 +190,7 @@ export default function ListProperty() {
                     your submission and contact you within 24 hours.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Button variant="accent" onClick={() => { setStep(1); setFormData({ ownerName: '', ownerPhone: '', ownerEmail: '', propertyType: '', listingType: '', title: '', address: '', city: '', area: '', bedrooms: '', bathrooms: '', areaSqFt: '', expectedPrice: '', description: '' }); }}>
+                    <Button variant="accent" onClick={() => { setStep(1); setFormData({ ownerName: '', ownerPhone: '', ownerEmail: '', propertyType: '', listingType: '', title: '', address: '', city: '', area: '', bedrooms: '', bathrooms: '', areaSqFt: '', expectedPrice: '', description: '', website: '' }); }}>
                       List Another Property
                     </Button>
                     <Button variant="outline" asChild>
@@ -267,7 +269,19 @@ export default function ListProperty() {
                           />
                         </div>
 
-                        <Button 
+                        {/* Honeypot field - hidden from users, catches bots */}
+                        <input
+                          type="text"
+                          name="website"
+                          value={formData.website}
+                          onChange={handleChange}
+                          className="absolute -left-[9999px] opacity-0 pointer-events-none"
+                          tabIndex={-1}
+                          autoComplete="off"
+                          aria-hidden="true"
+                        />
+
+                        <Button
                           type="button" 
                           variant="accent" 
                           size="lg"

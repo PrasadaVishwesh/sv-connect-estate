@@ -11,26 +11,89 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-// Simple in-memory rate limiting (per IP, resets on function cold start)
-const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+// Rate limiting configuration
 const RATE_LIMIT_MAX = 5; // Max 5 requests per window
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour window
 
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const record = rateLimitMap.get(ip);
-  
-  if (!record || now > record.resetTime) {
-    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+// Create Supabase client with service role for rate limiting
+function getSupabaseClient() {
+  return createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
+}
+
+// Persistent rate limiting using database
+async function isRateLimited(ip: string, endpoint: string): Promise<boolean> {
+  const supabase = getSupabaseClient();
+  const now = new Date();
+  const windowStart = new Date(now.getTime() - RATE_LIMIT_WINDOW_MS);
+
+  try {
+    // Check if there's an existing record for this IP and endpoint
+    const { data: existing, error: selectError } = await supabase
+      .from('rate_limits')
+      .select('*')
+      .eq('ip_address', ip)
+      .eq('endpoint', endpoint)
+      .single();
+
+    if (selectError && selectError.code !== 'PGRST116') {
+      // PGRST116 means no rows found, which is fine
+      console.error('Rate limit check error:', selectError);
+      return false; // Allow request on error
+    }
+
+    if (!existing) {
+      // No existing record, create one
+      await supabase.from('rate_limits').insert({
+        ip_address: ip,
+        endpoint: endpoint,
+        request_count: 1,
+        window_start: now.toISOString(),
+      });
+      return false;
+    }
+
+    // Check if window has expired
+    const recordWindowStart = new Date(existing.window_start);
+    if (recordWindowStart < windowStart) {
+      // Window expired, reset the counter
+      await supabase
+        .from('rate_limits')
+        .update({
+          request_count: 1,
+          window_start: now.toISOString(),
+        })
+        .eq('id', existing.id);
+      return false;
+    }
+
+    // Check if over limit
+    if (existing.request_count >= RATE_LIMIT_MAX) {
+      return true; // Rate limited
+    }
+
+    // Increment counter
+    await supabase
+      .from('rate_limits')
+      .update({
+        request_count: existing.request_count + 1,
+      })
+      .eq('id', existing.id);
+
     return false;
+  } catch (error) {
+    console.error('Rate limiting error:', error);
+    return false; // Allow request on error
   }
-  
-  if (record.count >= RATE_LIMIT_MAX) {
-    return true;
+}
+
+// Cleanup old rate limit records (call occasionally)
+async function cleanupRateLimits() {
+  const supabase = getSupabaseClient();
+  try {
+    await supabase.rpc('cleanup_old_rate_limits');
+  } catch (error) {
+    console.error('Rate limit cleanup error:', error);
   }
-  
-  record.count++;
-  return false;
 }
 
 // HTML escape function to prevent XSS/injection
@@ -46,6 +109,11 @@ function escapeHtml(text: string): string {
 
 // Input validation
 function validateInput(data: any): { valid: boolean; error?: string } {
+  // Honeypot check - if website field is filled, it's a bot
+  if (data.website && data.website.trim().length > 0) {
+    return { valid: false, error: 'Spam detected' };
+  }
+
   if (!data.name || typeof data.name !== 'string' || data.name.trim().length === 0) {
     return { valid: false, error: 'Name is required' };
   }
@@ -86,6 +154,7 @@ interface ContactNotificationRequest {
   phone: string;
   subject?: string;
   message: string;
+  website?: string; // Honeypot field - should always be empty
   notificationType?: 'contact' | 'owner_submission' | 'property_enquiry';
   propertyTitle?: string;
   propertyId?: string;
@@ -104,9 +173,14 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    // Rate limiting check
-    const clientIP = req.headers.get("x-forwarded-for") || req.headers.get("cf-connecting-ip") || "unknown";
-    if (isRateLimited(clientIP)) {
+    // Get client IP for rate limiting
+    const clientIP = req.headers.get("x-forwarded-for")?.split(',')[0]?.trim() || 
+                     req.headers.get("cf-connecting-ip") || 
+                     "unknown";
+    
+    // Persistent rate limiting check
+    const endpoint = 'send-contact-notification';
+    if (await isRateLimited(clientIP, endpoint)) {
       console.log(`Rate limit exceeded for IP: ${clientIP}`);
       return new Response(
         JSON.stringify({ error: "Too many requests. Please try again later." }),
@@ -117,9 +191,14 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
+    // Occasionally cleanup old rate limit records
+    if (Math.random() < 0.1) {
+      cleanupRateLimits();
+    }
+
     const data: ContactNotificationRequest = await req.json();
     
-    // Validate required fields
+    // Validate required fields (includes honeypot check)
     const validation = validateInput(data);
     if (!validation.valid) {
       console.log("Validation failed:", validation.error);
