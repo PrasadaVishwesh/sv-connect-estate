@@ -15,6 +15,7 @@ export default function Contact() {
     phone: '',
     subject: '',
     message: '',
+    website: '', // Honeypot field - should always be empty
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -47,6 +48,7 @@ export default function Contact() {
           phone: formData.phone,
           subject: formData.subject,
           message: formData.message,
+          website: formData.website, // Honeypot field
         },
       });
 
@@ -60,7 +62,7 @@ export default function Contact() {
         description: "Thank you for contacting us. We'll get back to you soon.",
       });
       
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', subject: '', message: '', website: '' });
     } catch (error: any) {
       console.error('Submission error:', error);
       toast({
@@ -291,7 +293,19 @@ export default function Contact() {
                     />
                   </div>
 
-                  <Button 
+                  {/* Honeypot field - hidden from users, catches bots */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
+                    onChange={(e) => setFormData(f => ({ ...f, website: e.target.value }))}
+                    className="absolute -left-[9999px] opacity-0 pointer-events-none"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                  />
+
+                  <Button
                     type="submit" 
                     variant="accent" 
                     size="lg" 

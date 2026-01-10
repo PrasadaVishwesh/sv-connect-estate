@@ -32,6 +32,7 @@ export default function PropertyDetail() {
     email: '',
     message: '',
     preferredTime: '',
+    website: '', // Honeypot field - should always be empty
   });
 
   const property = properties.find(p => p.id === id);
@@ -101,6 +102,7 @@ export default function PropertyDetail() {
           phone: formData.phone,
           message: formData.message || `Enquiry for property: ${property.title}`,
           subject: formData.preferredTime,
+          website: formData.website, // Honeypot field
           notificationType: 'property_enquiry',
           propertyTitle: property.title,
           propertyId: property.id,
@@ -116,7 +118,7 @@ export default function PropertyDetail() {
         title: "Enquiry Submitted!",
         description: "Our team will contact you shortly.",
       });
-      setFormData({ name: '', phone: '', email: '', message: '', preferredTime: '' });
+      setFormData({ name: '', phone: '', email: '', message: '', preferredTime: '', website: '' });
     } catch (error: any) {
       console.error('Submission error:', error);
       toast({
@@ -398,6 +400,17 @@ export default function PropertyDetail() {
                   <option value="afternoon">Afternoon (12 PM - 5 PM)</option>
                   <option value="evening">Evening (5 PM - 9 PM)</option>
                 </select>
+                {/* Honeypot field - hidden from users, catches bots */}
+                <input
+                  type="text"
+                  name="website"
+                  value={formData.website}
+                  onChange={(e) => setFormData(f => ({ ...f, website: e.target.value }))}
+                  className="absolute -left-[9999px] opacity-0 pointer-events-none"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                />
                 <Button type="submit" variant="accent" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? 'Sending...' : 'Send Enquiry'}
                 </Button>
