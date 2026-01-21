@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
-import { Link } from 'react-router-dom';
 import { Property, formatPrice } from '@/data/properties';
 import { Bed, Bath, Square, MapPin } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
@@ -88,12 +87,12 @@ export function PropertyMap({ properties, className = '' }: PropertyMapProps) {
                     {formatPrice(property.price, property.listingType)}
                     {property.listingType === 'rent' && '/mo'}
                   </span>
-                  <Link
-                    to={`/property/${property.id}`}
+                  <a
+                    href={`/property/${property.id}`}
                     className="text-xs text-accent hover:underline font-medium"
                   >
                     View Details →
-                  </Link>
+                  </a>
                 </div>
               </div>
             </Popup>
