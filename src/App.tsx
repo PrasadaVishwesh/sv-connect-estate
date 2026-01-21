@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { RouteErrorBoundary } from "@/components/RouteErrorBoundary";
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
@@ -13,29 +15,74 @@ import MapView from "./pages/MapView";
 import NotFound from "./pages/NotFound";
 import { WhatsAppButton } from "./components/WhatsAppButton";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // Prevent queries from throwing errors to the error boundary
+      throwOnError: false,
+      retry: 1,
+    },
+  },
+});
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/properties" element={<Properties />} />
-          <Route path="/property/:id" element={<PropertyDetail />} />
-          <Route path="/map" element={<MapView />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/list-property" element={<ListProperty />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <WhatsAppButton />
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  // Global error boundary catches any uncaught errors at app root
+  <ErrorBoundary
+    onError={(error, errorInfo) => {
+      // Log to monitoring service in production
+      console.error('[App] Critical error caught at root:', error);
+      console.error('[App] Component stack:', errorInfo.componentStack);
+    }}
+  >
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={
+              <RouteErrorBoundary pageName="Home">
+                <Index />
+              </RouteErrorBoundary>
+            } />
+            <Route path="/properties" element={
+              <RouteErrorBoundary pageName="Properties">
+                <Properties />
+              </RouteErrorBoundary>
+            } />
+            <Route path="/property/:id" element={
+              <RouteErrorBoundary pageName="Property Details">
+                <PropertyDetail />
+              </RouteErrorBoundary>
+            } />
+            <Route path="/map" element={
+              <RouteErrorBoundary pageName="Map View">
+                <MapView />
+              </RouteErrorBoundary>
+            } />
+            <Route path="/about" element={
+              <RouteErrorBoundary pageName="About">
+                <About />
+              </RouteErrorBoundary>
+            } />
+            <Route path="/contact" element={
+              <RouteErrorBoundary pageName="Contact">
+                <Contact />
+              </RouteErrorBoundary>
+            } />
+            <Route path="/list-property" element={
+              <RouteErrorBoundary pageName="List Property">
+                <ListProperty />
+              </RouteErrorBoundary>
+            } />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <WhatsAppButton />
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 export default App;
