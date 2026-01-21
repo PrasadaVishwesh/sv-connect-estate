@@ -14,5 +14,18 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    // Prevent multiple copies of React in the dependency graph (common cause of
+    // "render2 is not a function" / Context consumer runtime errors)
+    dedupe: [
+      "react",
+      "react-dom",
+      "react/jsx-runtime",
+      "react/jsx-dev-runtime",
+      "scheduler",
+    ],
+  },
+  optimizeDeps: {
+    // Pre-bundle leaflet deps to stabilize dev/HMR behavior
+    include: ["leaflet", "react-leaflet"],
   },
 }));
