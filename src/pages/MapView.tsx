@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Layout } from '@/components/layout/Layout';
-import { PropertyMap } from '@/components/PropertyMap';
+import { PropertyMap } from '@/components/PropertyMapWrapper';
 import { PropertyCard } from '@/components/PropertyCard';
 import { properties, PropertyType, ListingType } from '@/data/properties';
 import { Button } from '@/components/ui/button';
