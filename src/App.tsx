@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { RouteErrorBoundary } from "@/components/RouteErrorBoundary";
+import { RouteTracker } from "@/components/RouteTracker";
+import { LoadingBar } from "@/components/LoadingBar";
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
@@ -21,24 +23,25 @@ const queryClient = new QueryClient({
       // Prevent queries from throwing errors to the error boundary
       throwOnError: false,
       retry: 1,
+      // Add stale time to prevent unnecessary refetches
+      staleTime: 5 * 60 * 1000, // 5 minutes
     },
   },
 });
 
 const App = () => (
   // Global error boundary catches any uncaught errors at app root
-  <ErrorBoundary
-    onError={(error, errorInfo) => {
-      // Log to monitoring service in production
-      console.error('[App] Critical error caught at root:', error);
-      console.error('[App] Component stack:', errorInfo.componentStack);
-    }}
-  >
+  <ErrorBoundary>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          {/* Route change tracker for error monitoring */}
+          <RouteTracker />
+          {/* Loading indicator for route transitions */}
+          <LoadingBar />
+          
           <Routes>
             <Route path="/" element={
               <RouteErrorBoundary pageName="Home">
