@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { RouteErrorBoundary } from "@/components/RouteErrorBoundary";
 import { RouteTracker } from "@/components/RouteTracker";
-import { LoadingBar } from "@/components/LoadingBar";
+
 import Index from "./pages/Index";
 import Properties from "./pages/Properties";
 import PropertyDetail from "./pages/PropertyDetail";
@@ -39,8 +39,6 @@ const App = () => (
         <BrowserRouter>
           {/* Route change tracker for error monitoring */}
           <RouteTracker />
-          {/* Loading indicator for route transitions */}
-          <LoadingBar />
           
           <Routes>
             <Route path="/" element={
